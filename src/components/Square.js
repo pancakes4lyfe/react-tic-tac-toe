@@ -14,7 +14,8 @@ const Square = (props) => {
   };
 
   return <button
-    className='square' id={props.id} onClick={onSquareClick}
+    className='square' id={props.id} onClick={onSquareClick} 
+    // disabled={props.value}
   >
     {props.value}
   </button>
