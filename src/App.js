@@ -3,8 +3,8 @@ import './App.css';
 
 import Board from './components/Board';
 
-const PLAYER_1 = 'X';
-const PLAYER_2 = 'O';
+const PLAYER_1 = 'x';
+const PLAYER_2 = 'o';
 
 const generateSquares = () => {
   const squares = [];
@@ -80,14 +80,19 @@ const App = () => {
         winner = squares[0][i].value;
       }
     }
-    if (squares[0][0].value === squares[1][1].value && squares[0][0].value === squares[2][2].value && squares[0][0].value !== '') {
-      winner = squares[0][0].value;
+    if ((squares[0][0].value === squares[1][1].value && squares[0][0].value === squares[2][2].value && squares[0][0].value !== '') || (squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][0].value && squares[0][2].value !== '')) {
+      winner = squares[1][1].value;
     }
-    if (squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][0].value && squares[0][2].value !== '') {
-      winner = squares[0][2].value;
+    if (winner) {
+      setWinner(winner);
     }
-    setWinner(winner);
+    // console.log(winner);
   }
+
+  if (!winner) {
+    checkForWinner()
+  } 
+  
 
   const resetGame = () => {
     // Complete in Wave 4
@@ -97,7 +102,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>The winner is ... {winner} </h2>
+        <h2>Winner is {winner}</h2>
         <button>Reset Game</button>
       </header>
       <main>
