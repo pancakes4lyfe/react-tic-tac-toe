@@ -26,36 +26,40 @@ const generateSquares = () => {
 }
 
 const App = () => {
-
   // This starts state off as a 2D array of JS objects with
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
   const [turn, setTurn] = useState(PLAYER_1);
   const[winner, setWinner] = useState('')
 
+  
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
   const handleClick = (squareId) => {
-    const updatedSquare = {id:squareId, value:turn};
-    const updatedSquaresData = squares.map(row => {
-      return row.map(square => {
-        if (square.id === squareId) {
-          return updatedSquare;
-        } else {
-          return square;
-        }
-      });
-    });
-    setSquares(updatedSquaresData);
-    checkForWinner()
-    if (turn === 'X') {
-      setTurn(PLAYER_2);
+    if (winner) {
+      console.log('GAME OVER!');
     } else {
-      setTurn(PLAYER_1);
+      const updatedSquare = {id:squareId, value:turn};
+      const updatedSquaresData = squares.map(row => {
+        return row.map(square => {
+          if (square.id === squareId) {
+            return updatedSquare;
+          } else {
+            return square;
+          }
+        });
+      });
+      setSquares(updatedSquaresData);
+      
+      if (turn === 'x') {
+        setTurn(PLAYER_2);
+      } else {
+        setTurn(PLAYER_1);
+      }
     }
-    return winner;
+    
   }
 
 
