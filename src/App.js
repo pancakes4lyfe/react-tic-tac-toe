@@ -17,6 +17,7 @@ const generateSquares = () => {
       squares[row].push({
         id: currentId,
         value: '',
+        class: 'square'
       });
       currentId += 1;
     }
@@ -41,7 +42,7 @@ const App = () => {
     if (winner) {
       console.log('GAME OVER!');
     } else {
-      const updatedSquare = {id:squareId, value:turn};
+      const updatedSquare = {id:squareId, value:turn, class:'square'};
       const updatedSquaresData = squares.map(row => {
         return row.map(square => {
           if (square.id === squareId) {
@@ -59,7 +60,6 @@ const App = () => {
         setTurn(PLAYER_1);
       }
     }
-    
   }
 
 
@@ -77,20 +77,45 @@ const App = () => {
     for (let row of squares){
       if (row[0].value === row[1].value && row[0].value === row[2].value && row[0].value !== ''){
         winner = (row[0].value);
+        row[0].class = 'red-square';
+        row[1].class = 'red-square';
+        row[2].class= 'red-square';
       }       
     }
     for (let i = 0; i < 3; i++) {
       if (squares[0][i].value === squares[1][i].value && squares[0][i].value === squares[2][i].value && squares[0][i].value !== '') {
         winner = squares[0][i].value;
+        squares[0][i].class = 'red-square';
+        squares[1][i].class = 'red-square';
+        squares[2][i].class= 'red-square';
       }
     }
-    if ((squares[0][0].value === squares[1][1].value && squares[0][0].value === squares[2][2].value && squares[0][0].value !== '') || (squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][0].value && squares[0][2].value !== '')) {
+    if (squares[0][0].value === squares[1][1].value && squares[0][0].value === squares[2][2].value && squares[0][0].value !== '') {
       winner = squares[1][1].value;
+      squares[0][0].class = 'red-square';
+      squares[1][1].class = 'red-square';
+      squares[2][2].class= 'red-square';
+    }
+    if (squares[0][2].value === squares[1][1].value && squares[0][2].value === squares[2][0].value && squares[0][2].value !== '') {
+      winner = squares[1][1].value;
+      squares[0][2].class = 'red-square';
+      squares[1][1].class = 'red-square';
+      squares[2][0].class= 'red-square';
+    }
+    let fullBoard = true;
+    for (let row of squares) {
+      for (let square of row) {
+        if (!square.value) {
+          fullBoard = false;
+        }
+      }
+    }
+    if (fullBoard && !winner) {
+      winner = 'TIE'
     }
     if (winner) {
       setWinner(winner);
     }
-    // console.log(winner);
   }
 
   if (!winner) {

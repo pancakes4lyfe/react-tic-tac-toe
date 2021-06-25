@@ -12,7 +12,7 @@ const generateSquareComponents = (squares, onClickCallback) => {
   const squaresFlatList = [];
   for (let row of squares) {
     for (let square of row) {
-      squaresFlatList.push(<Square key={square.id} id={square.id} value={square.value} onClickCallback={onClickCallback}></Square>);
+      squaresFlatList.push(<Square key={square.id} id={square.id} value={square.value} className={square.class} onClickCallback={onClickCallback}></Square>);
     }
   }
   return squaresFlatList;
