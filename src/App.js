@@ -31,7 +31,8 @@ const App = () => {
   // empty value and unique ids.
   const [squares, setSquares] = useState(generateSquares());
   const [turn, setTurn] = useState(PLAYER_1);
-  const[winner, setWinner] = useState('')
+  const[winner, setWinner] = useState('');
+  const[boardStatus, setBoardStatus] = useState('grid');
 
   
   // Wave 2
@@ -113,7 +114,8 @@ const App = () => {
       }
     }
     if (fullBoard && !winner) {
-      winner = 'TIE'
+      winner = 'TIE';
+      setBoardStatus('tieBoard');
     }
     if (winner) {
       setWinner(winner);
@@ -128,8 +130,9 @@ const App = () => {
   const resetGame = () => {
     // Complete in Wave 4
     setSquares(generateSquares());
-    setWinner('');
     setTurn(PLAYER_1);
+    setWinner('');
+    setBoardStatus('grid');
   }
 
   return (
@@ -140,7 +143,7 @@ const App = () => {
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board squares={squares} onClickCallback={handleClick} />
+        <Board className={boardStatus} squares={squares} onClickCallback={handleClick} />
       </main>
     </div>
   );

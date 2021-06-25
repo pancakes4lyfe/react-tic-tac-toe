@@ -9,3 +9,16 @@ div.grid {
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
 }
+
+div.tieBoard {
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    background-color: red;
+    color: #fff;
+    border: 6px solid #2c3e50;
+    border-radius: 10px;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}
+
