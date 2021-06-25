@@ -38,9 +38,11 @@ const App = () => {
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
-  const handleClick = (squareId) => {
+  const handleClick = (squareId, squareValue) => {
     if (winner) {
       console.log('GAME OVER!');
+    } else if (squareValue) {
+      console.log('Already Clicked!');
     } else {
       const updatedSquare = {id:squareId, value:turn, class:'square'};
       const updatedSquaresData = squares.map(row => {

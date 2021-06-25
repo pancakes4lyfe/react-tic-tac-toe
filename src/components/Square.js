@@ -9,7 +9,7 @@ const Square = (props) => {
   //  component when it's clicked on.
 
   const onSquareClick = () => {
-    props.onClickCallback(props.id);
+    props.onClickCallback(props.id, props.value);
   };
 
   return <button
