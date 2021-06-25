@@ -32,20 +32,15 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [turn, setTurn] = useState(PLAYER_1);
   const[winner, setWinner] = useState('');
-  const[boardStatus, setBoardStatus] = useState('grid');
+  // const[boardStatus, setBoardStatus] = useState('grid');
 
   
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
-  const handleClick = (squareId, squareValue) => {
-    if (winner) {
-      console.log('GAME OVER!');
-    } else if (squareValue) {
-      console.log('Already Clicked!');
-    } else {
-      const updatedSquare = {id:squareId, value:turn, class:'square'};
+  const fillSquare = (squareId) => {
+    const updatedSquare = {id:squareId, value:turn, class:'square'};
       const updatedSquaresData = squares.map(row => {
         return row.map(square => {
           if (square.id === squareId) {
@@ -62,6 +57,15 @@ const App = () => {
       } else {
         setTurn(PLAYER_1);
       }
+  }
+
+  const handleClick = (squareId, squareValue) => {
+    if (winner) {
+      console.log('Nope, game over!');
+    } else if (squareValue) {
+      console.log('Already Clicked!');
+    } else {
+      fillSquare(squareId);
     }
   }
 
@@ -115,7 +119,7 @@ const App = () => {
     }
     if (fullBoard && !winner) {
       winner = 'TIE';
-      setBoardStatus('tieBoard');
+      // setBoardStatus('tieBoard');
     }
     if (winner) {
       setWinner(winner);
@@ -132,7 +136,7 @@ const App = () => {
     setSquares(generateSquares());
     setTurn(PLAYER_1);
     setWinner('');
-    setBoardStatus('grid');
+    // setBoardStatus('grid');
   }
 
   return (
@@ -143,7 +147,7 @@ const App = () => {
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board className={boardStatus} squares={squares} onClickCallback={handleClick} />
+        <Board /*className={boardStatus}*/ squares={squares} onClickCallback={handleClick} />
       </main>
     </div>
   );

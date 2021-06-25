@@ -18,10 +18,10 @@ const generateSquareComponents = (squares, onClickCallback) => {
   return squaresFlatList;
 }
 
-const Board = ({ squares, onClickCallback, className }) => {
+const Board = ({ squares, onClickCallback/*, className*/ }) => {
   const squareList = generateSquareComponents(squares, onClickCallback);
   // console.log(squareList);
-  return <div className={className} >
+  return <div className='grid'/*{className}*/ >
     {squareList}
   </div>
 }
