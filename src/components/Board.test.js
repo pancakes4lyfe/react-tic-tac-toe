@@ -52,7 +52,7 @@ describe('Wave 1: Board', () => {
 
   test('that board will render with the proper number of Xs and Os', () => {
     // Act
-    render(<Board squares={SAMPLE_BOARD} onClickCallback={() => { }} />);
+    render(<Board squares={SAMPLE_BOARD} onClickCallback={() => { }} className='grid'/>);
       
     // Assert
     const xSquares = screen.getAllByText('X');
@@ -74,7 +74,7 @@ describe('Wave 1: Board', () => {
     });
 
     // Act
-    const { container } = render(<Board squares={emptyBoard} onClickCallback={() => { }} />);
+    const { container } = render(<Board squares={emptyBoard} onClickCallback={() => { }} className='grid' />);
 
     // Assert
     const buttons = container.querySelectorAll('.grid button');
@@ -86,7 +86,7 @@ describe('Wave 2: Board', () => {
     test('that the callback is called for the 1st button', () => {
       // Arrange
       const callback = jest.fn();
-      const { container } = render(<Board squares={SAMPLE_BOARD} onClickCallback={callback} />);
+      const { container } = render(<Board squares={SAMPLE_BOARD} onClickCallback={callback} className='grid'/>);
       const buttons = container.querySelectorAll('.grid button');
 
       // Act
@@ -99,7 +99,7 @@ describe('Wave 2: Board', () => {
     test('that the callback is called for the last button', () => {
       // Arrange
       const callback = jest.fn();
-      const { container } = render(<Board squares={SAMPLE_BOARD} onClickCallback={callback} />);
+      const { container } = render(<Board squares={SAMPLE_BOARD} onClickCallback={callback} className='grid'/>);
       const buttons = container.querySelectorAll('.grid button');
 
       // Act

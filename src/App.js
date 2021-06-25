@@ -32,7 +32,7 @@ const App = () => {
   const [squares, setSquares] = useState(generateSquares());
   const [turn, setTurn] = useState(PLAYER_1);
   const[winner, setWinner] = useState('');
-  // const[boardStatus, setBoardStatus] = useState('grid');
+  const[boardStatus, setBoardStatus] = useState('grid');
 
   
   // Wave 2
@@ -119,7 +119,7 @@ const App = () => {
     }
     if (fullBoard && !winner) {
       winner = 'TIE';
-      // setBoardStatus('tieBoard');
+      setBoardStatus('tieBoard');
     }
     if (winner) {
       setWinner(winner);
@@ -136,7 +136,7 @@ const App = () => {
     setSquares(generateSquares());
     setTurn(PLAYER_1);
     setWinner('');
-    // setBoardStatus('grid');
+    setBoardStatus('grid');
   }
 
   return (
@@ -147,7 +147,7 @@ const App = () => {
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>
-        <Board /*className={boardStatus}*/ squares={squares} onClickCallback={handleClick} />
+        <Board squares={squares} onClickCallback={handleClick} className={boardStatus} />
       </main>
     </div>
   );
