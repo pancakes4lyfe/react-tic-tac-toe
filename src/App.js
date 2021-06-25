@@ -33,14 +33,29 @@ const App = () => {
   const [turn, setTurn] = useState(PLAYER_1);
   const[winner, setWinner] = useState('');
   const[boardStatus, setBoardStatus] = useState('grid');
+  const[playerX, setPlayerX] = useState('Player X');
+  const[playerO, setPlayerO] = useState('Player O');
 
-  
+  // Is called when player input is modified
+  const changePlayer = (event) => {
+    if (event.target.className === 'X') {
+      setPlayerX(event.target.value);
+    } else {
+      setPlayerO(event.target.value);
+    }
+  }
+
   // Wave 2
   // You will need to create a method to change the square 
   //   When it is clicked on.
   //   Then pass it into the squares as a callback
-  const fillSquare = (squareId) => {
-    const updatedSquare = {id:squareId, value:turn, class:'square'};
+  const handleClick = (squareId, squareValue) => {
+    if (winner) {
+      console.log('Nope, game over!');
+    } else if (squareValue) {
+      console.log('Already Clicked!');
+    } else {
+      const updatedSquare = {id:squareId, value:turn, class:'square'};
       const updatedSquaresData = squares.map(row => {
         return row.map(square => {
           if (square.id === squareId) {
@@ -57,15 +72,6 @@ const App = () => {
       } else {
         setTurn(PLAYER_1);
       }
-  }
-
-  const handleClick = (squareId, squareValue) => {
-    if (winner) {
-      console.log('Nope, game over!');
-    } else if (squareValue) {
-      console.log('Already Clicked!');
-    } else {
-      fillSquare(squareId);
     }
   }
 
@@ -117,17 +123,19 @@ const App = () => {
         }
       }
     }
+    // Checks for a tie
     if (fullBoard && !winner) {
       winner = 'TIE';
       setBoardStatus('tieBoard');
     }
+
     if (winner) {
       setWinner(winner);
     }
   }
 
   if (!winner) {
-    checkForWinner()
+    checkForWinner();
   } 
   
 
@@ -137,13 +145,22 @@ const App = () => {
     setTurn(PLAYER_1);
     setWinner('');
     setBoardStatus('grid');
+    setPlayerX('Player X');
+    setPlayerO('Player O');
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Tic Tac Toe</h1>
-        <h2>Winner is {winner}</h2>
+        <div className='Players'>
+          <label>X:</label>
+          <input type='text' value={playerX} className='X' onChange={changePlayer} />
+          <label>O:</label>
+          <input type='text' value={playerO} className='O' onChange={changePlayer} />
+        </div>
+        <h2>{playerX} vs. {playerO}</h2>
+        <h3>Winner is {winner}</h3>
         <button onClick={resetGame}>Reset Game</button>
       </header>
       <main>

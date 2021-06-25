@@ -14,3 +14,18 @@
   margin-bottom: 2em;
 }
 
+.Players {
+  display: flex;
+  flex-direction: row;
+}
+
+.Players input {
+  margin-right: 30px;
+  margin-left: 5px;
+}
+
+h2 {
+  margin-bottom: 0px;
+}
+
+
